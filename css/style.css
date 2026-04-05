@@ -82,3 +82,16 @@ button {
     color: white;
     margin-top: 40px;
 }
+
+.timer {
+    text-align: center;
+    padding: 50px;
+}
+
+.timer h1 {
+    font-size: 60px;
+}
+
+.timer-buttons button {
+    margin: 10px;
+}
