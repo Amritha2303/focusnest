@@ -48,3 +48,27 @@ button {
     border: none;
     border-radius: 5px;
 }
+
+.tools {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.tool-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.tool-card {
+    padding: 20px;
+    border-radius: 10px;
+    background: #f3f4f6;
+    transition: 0.3s;
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+    background: #e5e7eb;
+}
