@@ -114,3 +114,37 @@ button {
     text-decoration: none;
     color: inherit;
 }
+
+.todo {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.todo input {
+    padding: 10px;
+    width: 250px;
+}
+
+.todo ul {
+    list-style: none;
+    padding: 0;
+}
+
+.todo li {
+    background: #f3f4f6;
+    padding: 10px;
+    margin: 10px auto;
+    width: 300px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-btn {
+    float: right;
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
