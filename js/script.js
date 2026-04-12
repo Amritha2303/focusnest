@@ -127,3 +127,82 @@ if(display){
 display.textContent = "25:00";
 }
 }
+
+
+// ---------- EXAM COUNTDOWN ----------
+
+let exams = [];
+
+function addExam(){
+
+let name = document.getElementById("examName");
+let date = document.getElementById("examDate");
+
+if(!name || !date) return;
+
+if(name.value === "" || date.value === "") return;
+
+exams.push({
+name: name.value,
+date: date.value
+});
+
+name.value = "";
+date.value = "";
+
+saveExams();
+renderExams();
+}
+
+function renderExams(){
+
+let list = document.getElementById("examList");
+if(!list) return;
+
+list.innerHTML = "";
+
+exams.forEach((exam,index)=>{
+
+let li = document.createElement("li");
+
+let today = new Date();
+let examDate = new Date(exam.date);
+
+let diff = examDate - today;
+let days = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+li.textContent = exam.name + " - " + days + " days left";
+
+let deleteBtn = document.createElement("button");
+deleteBtn.textContent = "Delete";
+
+deleteBtn.onclick = function(){
+exams.splice(index,1);
+saveExams();
+renderExams();
+};
+
+li.appendChild(deleteBtn);
+
+list.appendChild(li);
+
+});
+
+}
+
+function saveExams(){
+localStorage.setItem("exams", JSON.stringify(exams));
+}
+
+function loadExams(){
+
+let stored = localStorage.getItem("exams");
+
+if(stored){
+exams = JSON.parse(stored);
+}
+
+renderExams();
+}
+
+loadExams();
