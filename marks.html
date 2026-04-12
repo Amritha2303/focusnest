@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Notes</title>
+<title>Marks Tracker</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -20,15 +20,23 @@
 
 <div class="page-content">
 
-<h1>Quick Notes</h1>
+<h1>Marks Tracker</h1>
 
-<textarea id="noteInput" placeholder="Write your note..."></textarea>
+<input type="text" id="subject" placeholder="Subject">
+<input type="number" id="marks" placeholder="Marks">
+<input type="number" id="total" placeholder="Total">
 
-<input type="file" id="fileInput">
+<button onclick="addMarks()">Add</button>
 
-<button onclick="addNote()">Save Note</button>
-
-<div id="notesContainer"></div>
+<table id="marksTable">
+<tr>
+<th>Subject</th>
+<th>Marks</th>
+<th>Total</th>
+<th>%</th>
+<th>Delete</th>
+</tr>
+</table>
 
 </div>
 

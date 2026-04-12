@@ -297,3 +297,93 @@ renderNotes();
 }
 
 loadNotes();
+
+
+// ---------- MARKS TRACKER ----------
+
+let marksData = [];
+
+function addMarks(){
+
+let subject = document.getElementById("subject");
+let marks = document.getElementById("marks");
+let total = document.getElementById("total");
+
+if(!subject || !marks || !total) return;
+
+if(subject.value === "" || marks.value === "" || total.value === "" || total.value == 0) return;
+
+let percentage = ((Number(marks.value) / Number(total.value)) * 100).toFixed(1);
+
+marksData.push({
+subject: subject.value,
+marks: marks.value,
+total: total.value,
+percentage: percentage
+});
+
+subject.value = "";
+marks.value = "";
+total.value = "";
+
+saveMarks();
+renderMarks();
+}
+
+function renderMarks(){
+
+let table = document.getElementById("marksTable");
+if(!table) return;
+
+table.innerHTML = `
+<tr>
+<th>Subject</th>
+<th>Marks</th>
+<th>Total</th>
+<th>%</th>
+<th>Delete</th>
+</tr>
+`;
+
+marksData.forEach((item,index)=>{
+
+let row = table.insertRow();
+
+row.insertCell(0).textContent = item.subject;
+row.insertCell(1).textContent = item.marks;
+row.insertCell(2).textContent = item.total;
+row.insertCell(3).textContent = item.percentage + "%";
+
+let deleteCell = row.insertCell(4);
+
+let deleteBtn = document.createElement("button");
+deleteBtn.textContent = "Delete";
+
+deleteBtn.onclick = function(){
+marksData.splice(index,1);
+saveMarks();
+renderMarks();
+};
+
+deleteCell.appendChild(deleteBtn);
+
+});
+
+}
+
+function saveMarks(){
+localStorage.setItem("marks", JSON.stringify(marksData));
+}
+
+function loadMarks(){
+
+let stored = localStorage.getItem("marks");
+
+if(stored){
+marksData = JSON.parse(stored);
+}
+
+renderMarks();
+}
+
+loadMarks();
