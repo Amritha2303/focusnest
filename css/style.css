@@ -35,3 +35,16 @@ border:1px solid #ccc;
 text-decoration:none;
 color:black;
 }
+
+.page-content{
+padding:40px;
+}
+
+li{
+list-style:none;
+margin:10px 0;
+}
+
+li button{
+margin-left:10px;
+}
