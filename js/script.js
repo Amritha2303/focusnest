@@ -215,14 +215,22 @@ let notes = [];
 function addNote(){
 
 let input = document.getElementById("noteInput");
+let fileInput = document.getElementById("fileInput");
 
 if(!input) return;
 
-if(input.value === "") return;
+let file = fileInput.files[0];
 
-notes.push(input.value);
+let note = {
+text: input.value,
+file: file ? URL.createObjectURL(file) : null,
+fileName: file ? file.name : null
+};
+
+notes.push(note);
 
 input.value = "";
+fileInput.value = "";
 
 saveNotes();
 renderNotes();
@@ -240,7 +248,21 @@ notes.forEach((note,index)=>{
 
 let div = document.createElement("div");
 
-div.textContent = note;
+let text = document.createElement("p");
+text.textContent = note.text;
+
+div.appendChild(text);
+
+if(note.file){
+
+let link = document.createElement("a");
+link.href = note.file;
+link.textContent = note.fileName;
+link.target = "_blank";
+
+div.appendChild(link);
+
+}
 
 let deleteBtn = document.createElement("button");
 deleteBtn.textContent = "Delete";
