@@ -206,3 +206,72 @@ renderExams();
 }
 
 loadExams();
+
+
+// ---------- NOTES ----------
+
+let notes = [];
+
+function addNote(){
+
+let input = document.getElementById("noteInput");
+
+if(!input) return;
+
+if(input.value === "") return;
+
+notes.push(input.value);
+
+input.value = "";
+
+saveNotes();
+renderNotes();
+}
+
+function renderNotes(){
+
+let container = document.getElementById("notesContainer");
+
+if(!container) return;
+
+container.innerHTML = "";
+
+notes.forEach((note,index)=>{
+
+let div = document.createElement("div");
+
+div.textContent = note;
+
+let deleteBtn = document.createElement("button");
+deleteBtn.textContent = "Delete";
+
+deleteBtn.onclick = function(){
+notes.splice(index,1);
+saveNotes();
+renderNotes();
+};
+
+div.appendChild(deleteBtn);
+
+container.appendChild(div);
+
+});
+
+}
+
+function saveNotes(){
+localStorage.setItem("notes", JSON.stringify(notes));
+}
+
+function loadNotes(){
+
+let stored = localStorage.getItem("notes");
+
+if(stored){
+notes = JSON.parse(stored);
+}
+
+renderNotes();
+}
+
+loadNotes();
